@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="T.C.E — Plombier chauffagiste à Bourg-la-Reine. Installation, dépannage, entretien. 7j/7.">
-<title>T.C.E — Plombier Chauffagiste</title>
+<meta name="description" content="T.C.E — Plombier chauffagiste à Bourg-la-Reine. Plomberie, chauffage, électricité, climatisation, maîtrise d'œuvre. Devis gratuit. 7j/7.">
+<title>T.C.E — Plombier Chauffagiste | Bourg-la-Reine 92</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
@@ -34,12 +34,12 @@ body {
   overflow-x: hidden;
 }
 
-/* ========== TOP BAR ========== */
+/* ========== TOP BAR — sticky ========== */
 .topbar {
   background: var(--ink);
   color: var(--bg);
-  padding: 0.5rem 2rem;
-  font-size: 0.78rem;
+  padding: 0.45rem 2rem;
+  font-size: 0.76rem;
   font-weight: 500;
   display: flex;
   justify-content: space-between;
@@ -48,25 +48,29 @@ body {
   position: sticky; top: 0; z-index: 200;
 }
 .topbar-left { display: flex; align-items: center; gap: 0.5rem; }
-.topbar-dot { width: 7px; height: 7px; background: #4ade80; border-radius: 50%; animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(74,222,128,.3)} 50%{box-shadow:0 0 0 6px rgba(74,222,128,0)} }
+.status-dot { width: 7px; height: 7px; background: #4ade80; border-radius: 50%; animation: statusPulse 2s infinite; }
+@keyframes statusPulse { 0%,100%{box-shadow:0 0 0 0 rgba(74,222,128,.35)} 50%{box-shadow:0 0 0 6px rgba(74,222,128,0)} }
 .topbar-right { color: var(--ink-muted); }
-.topbar-right a { color: var(--bg); text-decoration: none; font-weight: 600; }
-.topbar-right a:hover { text-decoration: underline; }
+.topbar-right a { color: var(--bg); text-decoration: none; font-weight: 600; transition: color 0.2s; }
+.topbar-right a:hover { color: var(--accent-glow); }
 
-/* ========== HEADER ========== */
+/* ========== HEADER — reveal animation ========== */
 .header {
-  padding: 1.75rem 2rem;
+  padding: 1.5rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--border);
-  background: var(--bg);
-  position: sticky; top: 32px; z-index: 100;
+  background: rgba(245,242,237,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: sticky; top: 30px; z-index: 100;
+  transition: padding 0.3s ease, box-shadow 0.3s ease;
 }
+.header.scrolled { padding: 0.9rem 2rem; box-shadow: 0 1px 0 var(--border), 0 4px 24px rgba(0,0,0,0.04); }
 .logo {
   font-family: 'Newsreader', Georgia, serif;
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: 600;
   color: var(--ink);
   letter-spacing: -0.02em;
@@ -74,25 +78,28 @@ body {
   display: flex;
   align-items: baseline;
   gap: 0.15rem;
+  transition: font-size 0.3s ease;
 }
+.header.scrolled .logo { font-size: 1.4rem; }
 .logo .period { color: var(--accent); font-weight: 700; }
 .logo-tagline {
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   color: var(--ink-muted);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 500;
   margin-left: 0.5rem;
-  display: none;
 }
-@media (min-width: 600px) { .logo-tagline { display: inline; } }
+@media (max-width: 599px) { .logo-tagline { display: none; } }
 .header-nav { display: flex; gap: 2rem; list-style: none; align-items: center; }
-.header-nav a { color: var(--ink-light); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+.header-nav a { color: var(--ink-light); text-decoration: none; font-size: 0.86rem; font-weight: 500; transition: color 0.2s; position: relative; }
+.header-nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1.5px; background: var(--accent); transition: width 0.3s ease; }
 .header-nav a:hover { color: var(--accent); }
-.header-phone { font-weight: 700; color: var(--ink) !important; font-size: 1rem !important; }
+.header-nav a:hover::after { width: 100%; }
+.header-phone { font-weight: 700; color: var(--ink) !important; font-size: 0.95rem !important; }
 
-/* ========== MASTHEAD ========== */
+/* ========== MASTHEAD — staggered reveal ========== */
 .masthead {
   padding: 5rem 2rem 3rem;
   max-width: 1100px;
@@ -100,12 +107,15 @@ body {
 }
 .masthead-eyebrow {
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.18em;
   color: var(--accent);
   font-weight: 700;
   margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: revealUp 0.8s 0.1s forwards ease-out;
 }
 .masthead h1 {
   font-family: 'Newsreader', Georgia, serif;
@@ -115,38 +125,59 @@ body {
   letter-spacing: -0.03em;
   max-width: 800px;
   color: var(--ink);
+  opacity: 0;
+  transform: translateY(12px);
+  animation: revealUp 0.8s 0.25s forwards ease-out;
 }
 .masthead h1 em {
   font-style: italic;
   font-weight: 400;
+  position: relative;
+  display: inline-block;
 }
+.masthead h1 em::after {
+  content: '';
+  position: absolute;
+  bottom: 2px; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent);
+  opacity: 0.25;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: underlineReveal 0.6s 1.2s forwards ease-out;
+}
+@keyframes underlineReveal { to { transform: scaleX(1); } }
 .masthead-dek {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   color: var(--ink-light);
-  max-width: 520px;
+  max-width: 500px;
   margin-top: 1.5rem;
   line-height: 1.6;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: revealUp 0.8s 0.4s forwards ease-out;
 }
+@keyframes revealUp { to { opacity: 1; transform: translateY(0); } }
 
-/* ========== HERO IMAGE STRIP ========== */
+/* ========== HERO IMAGE STRIP — parallax + hover ========== */
 .hero-strip {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 0.5rem;
   max-width: 1100px;
-  margin: 0 auto 1rem;
+  margin: 0 auto 1.5rem;
   padding: 0 2rem;
+  opacity: 0;
+  animation: revealUp 1s 0.5s forwards ease-out;
 }
 .hero-main {
-  background: var(--surface);
   aspect-ratio: 16/9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
-.hero-main img { width: 100%; height: 100%; object-fit: cover; }
+.hero-main img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.hero-main:hover img { transform: scale(1.03); }
 .hero-main-placeholder {
   position: absolute; inset: 0;
   background: linear-gradient(135deg, #2a2520 0%, #3d352e 50%, #4a3f35 100%);
@@ -154,7 +185,7 @@ body {
 }
 .hero-main-placeholder::after {
   content: 'Photo de chantier';
-  color: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.15);
   font-family: 'Newsreader', serif;
   font-size: 1.5rem;
   font-style: italic;
@@ -166,18 +197,21 @@ body {
 }
 .hero-side-item {
   flex: 1;
-  background: var(--surface);
   overflow: hidden;
   position: relative;
-  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
 }
+.hero-side-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.hero-side-item:hover img { transform: scale(1.05); }
 .hero-side-item:first-child { background: linear-gradient(135deg, #3a3028, #4a3d32); }
 .hero-side-item:last-child { background: linear-gradient(135deg, #2d2822, #3d352c); }
 .hero-side-item::after {
   content: 'Avant / Après';
-  color: rgba(255,255,255,0.15);
+  position: absolute;
+  bottom: 0.75rem; left: 0.75rem;
+  color: rgba(255,255,255,0.5);
   font-family: 'Newsreader', serif;
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-style: italic;
 }
 
@@ -193,12 +227,16 @@ body {
 .quick-trust-item {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 0.9rem;
+  gap: 0.5rem;
+  font-size: 0.88rem;
   color: var(--ink-light);
   font-weight: 500;
+  opacity: 0;
+  transform: translateY(8px);
 }
-.quick-trust-item .check { color: var(--accent); font-weight: 700; font-size: 1.1rem; }
+.quick-trust-item.visible { animation: trustReveal 0.5s forwards ease-out; }
+@keyframes trustReveal { to { opacity: 1; transform: translateY(0); } }
+.quick-trust-item .check { color: var(--accent); font-weight: 700; font-size: 1.05rem; }
 
 /* ========== SECTION HEADINGS ========== */
 .section { padding: 5rem 0; }
@@ -206,38 +244,52 @@ body {
 .section-num { font-family: 'Newsreader', serif; font-size: 0.9rem; color: var(--accent); font-style: italic; margin-bottom: 0.5rem; }
 .section-heading { font-family: 'Newsreader', Georgia, serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 2rem; max-width: 650px; }
 
-/* ========== SERVICES - ASYMMETRIC ========== */
+/* ========== SCROLL REVEAL ========== */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ========== SERVICES - EXPANDED ========== */
 #services { border-top: 1px solid var(--border); }
 .services-layout { display: flex; flex-direction: column; gap: 0; }
-.service-row { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); padding: 2.5rem 0; gap: 3rem; align-items: center; }
+
+.service-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+  gap: 3rem;
+  align-items: start;
+}
+
 .service-row:last-child { border-bottom: none; }
 .service-row:nth-child(even) .service-visual { order: -1; }
 .service-visual {
-  background: var(--surface);
-  aspect-ratio: 4/3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  aspect-ratio: 5/4;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  margin-top: 2.5rem;
 }
+.service-visual img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.service-visual:hover img { transform: scale(1.04); }
 .service-visual-inner {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
-  transition: transform 0.4s ease;
 }
-.service-visual:hover .service-visual-inner { transform: scale(1.03); }
 .sv-plumbing { background: linear-gradient(135deg, #3a3028, #4a3d32); }
 .sv-heating { background: linear-gradient(135deg, #4a3020, #5c3828); }
 .sv-electric { background: linear-gradient(135deg, #2d3528, #3d4535); }
 .sv-cooling { background: linear-gradient(135deg, #28303a, #354050); }
 .sv-moe { background: linear-gradient(135deg, #2a2835, #383548); }
 .service-visual-label {
-  color: rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.2);
   font-family: 'Newsreader', serif;
   font-size: 1.2rem;
   font-style: italic;
 }
+.service-info { padding: 2.5rem 0; }
 .service-info h3 {
   font-family: 'Newsreader', Georgia, serif;
   font-size: 1.8rem;
@@ -245,13 +297,21 @@ body {
   margin-bottom: 0.5rem;
   letter-spacing: -0.02em;
 }
-.service-info p {
-  color: var(--ink-light);
+.service-info .hook {
   font-size: 0.95rem;
+  color: var(--ink-light);
   line-height: 1.65;
   margin-bottom: 1rem;
-  max-width: 400px;
+  max-width: 420px;
 }
+.service-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem 1.5rem;
+  margin-bottom: 1.2rem;
+}
+.service-detail-item { font-size: 0.82rem; color: var(--ink-light); display: flex; align-items: flex-start; gap: 0.4rem; }
+.service-detail-item::before { content: '—'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
 .service-subs {
   display: flex;
   flex-wrap: wrap;
@@ -259,13 +319,13 @@ body {
   margin-bottom: 1.2rem;
 }
 .service-sub {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   color: var(--ink);
   background: var(--surface);
   padding: 0.3rem 0.8rem;
   font-weight: 500;
   text-decoration: none;
-  transition: all 0.2s;
+  transition: all 0.25s ease;
 }
 .service-sub:hover { background: var(--ink); color: var(--bg); }
 .service-cta {
@@ -278,11 +338,60 @@ body {
   gap: 0.3rem;
   border-bottom: 1.5px solid var(--accent);
   padding-bottom: 2px;
-  transition: all 0.2s;
+  transition: all 0.25s ease;
 }
 .service-cta:hover { gap: 0.6rem; }
 
-/* ========== PROJECT SHOWCASE ========== */
+/* ========== COUNTERS STRIP ========== */
+.counters-strip {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 3rem 2rem;
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  flex-wrap: wrap;
+}
+.counter-item { text-align: center; }
+.counter-number { font-family: 'Newsreader', Georgia, serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 600; line-height: 1; }
+.counter-number .plus { color: var(--accent-glow); }
+.counter-label { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* ========== PARALLAX BANNER ========== */
+.parallax-banner {
+  height: 60vh;
+  min-height: 400px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2a2520, #3d352e);
+}
+.parallax-bg {
+  position: absolute; inset: -20%;
+  background: linear-gradient(135deg, #2a2520 0%, #3d352e 40%, #4a3f35 70%, #2a2520 100%);
+  transition: transform 0.1s linear;
+  will-change: transform;
+}
+.parallax-content {
+  position: relative; z-index: 2;
+  text-align: center;
+  max-width: 600px;
+  padding: 2rem;
+}
+.parallax-quote {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-style: italic;
+  color: var(--bg);
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+}
+.parallax-attribution { color: rgba(255,255,255,0.5); font-size: 0.88rem; }
+
+/* ========== SHOWCASE — hover zoom reveal ========== */
 #work { background: var(--ink); color: var(--bg); padding: 6rem 0; }
 #work .section-num { color: var(--accent-glow); }
 #work .section-heading { color: var(--bg); }
@@ -290,24 +399,36 @@ body {
 .showcase-item {
   position: relative;
   aspect-ratio: 3/4;
-  background: rgba(255,255,255,0.03);
-  display: flex;
-  align-items: flex-end;
-  padding: 1.5rem;
   overflow: hidden;
+  cursor: pointer;
 }
-.showcase-item:nth-child(1) { background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.7)), linear-gradient(135deg, #3a3028, #4a3d32); }
-.showcase-item:nth-child(2) { background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.7)), linear-gradient(135deg, #353028, #453d32); }
-.showcase-item:nth-child(3) { background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.7)), linear-gradient(135deg, #2d3028, #3a3d32); }
+.showcase-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.showcase-item:hover img { transform: scale(1.06); }
+.showcase-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.7));
+  transition: opacity 0.3s;
+}
+.showcase-item:hover::after { opacity: 0.5; }
+.showcase-item:nth-child(1) { background: linear-gradient(135deg, #3a3028, #4a3d32); }
+.showcase-item:nth-child(2) { background: linear-gradient(135deg, #353028, #453d32); }
+.showcase-item:nth-child(3) { background: linear-gradient(135deg, #2d3028, #3a3d32); }
 .showcase-label {
+  position: absolute;
+  bottom: 1.5rem; left: 1.5rem; right: 1.5rem;
+  z-index: 3;
   font-family: 'Newsreader', serif;
   font-size: 0.9rem;
   font-style: italic;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.7);
+  transition: color 0.3s;
 }
+.showcase-item:hover .showcase-label { color: rgba(255,255,255,0.95); }
 .showcase-label::before { content: '● '; color: var(--accent-glow); }
 
-/* ========== REVIEW - LARGE PULL QUOTE ========== */
+/* ========== REVIEWS — pull quote ========== */
 #reviews { border-top: 1px solid var(--border); }
 .review-block {
   display: grid;
@@ -331,47 +452,64 @@ body {
   left: -0.5rem;
   font-size: 6rem;
   color: var(--accent);
-  opacity: 0.3;
+  opacity: 0.25;
   font-style: normal;
   line-height: 0;
 }
-.review-attribution { margin-top: 1.5rem; font-style: normal; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--ink-light); display: flex; align-items: center; gap: 0.75rem; }
+.review-attribution { margin-top: 1.5rem; font-style: normal; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--ink-light); display: flex; align-items: center; gap: 0.75rem; }
 .review-attribution .avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; color: var(--accent); }
-.review-stars { color: var(--accent); letter-spacing: 0.1em; font-style: normal; font-size: 0.9rem; }
-.review-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-.review-mini {
-  padding: 1.25rem 0;
-  border-bottom: 1px solid var(--border);
-}
+.review-stars { color: var(--accent); letter-spacing: 0.1em; font-style: normal; font-size: 0.88rem; }
+.review-sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+.review-mini { padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
 .review-mini:last-child { border-bottom: none; }
-.review-mini p { font-size: 0.9rem; color: var(--ink-light); line-height: 1.55; font-style: italic; }
-.review-mini .name { font-size: 0.78rem; color: var(--ink-muted); margin-top: 0.4rem; font-style: normal; font-weight: 600; }
+.review-mini p { font-size: 0.88rem; color: var(--ink-light); line-height: 1.55; font-style: italic; }
+.review-mini .name { font-size: 0.76rem; color: var(--ink-muted); margin-top: 0.4rem; font-style: normal; font-weight: 600; }
 
-/* ========== ZONES - MARQUEE ========== */
+/* ========== MARQUEE ZONES ========== */
 #zones { border-top: 1px solid var(--border); padding: 4rem 0; overflow: hidden; }
-.marquee { display: flex; gap: 2rem; white-space: nowrap; animation: marquee 25s linear infinite; }
+.marquee-wrap { display: flex; width: max-content; }
+.marquee { display: flex; gap: 2rem; white-space: nowrap; }
 .marquee span { font-family: 'Newsreader', Georgia, serif; font-size: clamp(1.5rem, 3vw, 2.5rem); font-style: italic; color: var(--ink-muted); font-weight: 400; }
-.marquee span.highlight { color: var(--accent); font-style: normal; font-weight: 600; }
-@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.marquee span.dot { color: var(--accent); font-style: normal; font-weight: 600; }
 
-/* ========== CONTACT - BUSINESS CARD ========== */
+/* ========== MARQUES ========== */
+#marques { border-top: 1px solid var(--border); padding: 4rem 0; text-align: center; }
+.marques-grid { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 2rem; align-items: center; }
+.marque-item { padding: 1.5rem 1.2rem; background: var(--white); border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; gap: 0.4rem; min-width: 120px; transition: all 0.3s ease; }
+.marque-item:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+.marque-item .brand { font-family: 'Newsreader', serif; font-size: 1.15rem; font-weight: 600; color: var(--ink); }
+.marque-item .cert { font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+
+/* ========== CONTACT ========== */
 #contact { border-top: 1px solid var(--border); }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 2rem; align-items: start; }
 .contact-card {
   background: var(--white);
   border: 1px solid var(--border);
   padding: 2.5rem;
+  transition: box-shadow 0.3s ease;
 }
+.contact-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.06); }
 .contact-card .business-name { font-family: 'Newsreader', serif; font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
 .contact-card .business-desc { font-size: 0.85rem; color: var(--ink-muted); margin-bottom: 1.5rem; }
 .contact-card .field { margin-bottom: 1rem; }
-.contact-card .field-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-muted); font-weight: 600; margin-bottom: 0.15rem; }
-.contact-card .field-value { font-size: 0.95rem; color: var(--ink); font-weight: 500; }
-.contact-card .field-value.large { font-size: 1.4rem; font-weight: 700; }
+.contact-card .field-label { font-size: 0.63rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-muted); font-weight: 600; margin-bottom: 0.15rem; }
+.contact-card .field-value { font-size: 0.93rem; color: var(--ink); font-weight: 500; }
+.contact-card .field-value.highlight { font-size: 1.4rem; font-weight: 700; }
+.contact-card .cta-btn {
+  display: inline-block;
+  margin-top: 1.2rem;
+  background: var(--accent);
+  color: var(--white);
+  padding: 0.8rem 1.8rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.93rem;
+  transition: all 0.25s ease;
+}
+.contact-card .cta-btn:hover { background: var(--accent-glow); transform: translateY(-2px); }
+
+/* ========== MAP ZONES ========== */
 .contact-map {
   background: var(--surface);
   aspect-ratio: 3/4;
@@ -381,10 +519,7 @@ body {
   position: relative;
   overflow: hidden;
 }
-.contact-map-inner {
-  text-align: center;
-  color: var(--ink-muted);
-}
+.contact-map-inner { text-align: center; color: var(--ink-muted); }
 .contact-map-inner .city-list {
   display: flex;
   flex-wrap: wrap;
@@ -393,6 +528,18 @@ body {
   margin-top: 1rem;
   font-size: 0.85rem;
 }
+.city-pill {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: default;
+}
+.city-pill:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.city-pill.highlight { background: var(--ink); color: var(--bg); font-weight: 600; }
 
 /* ========== FOOTER ========== */
 .footer {
@@ -401,41 +548,67 @@ body {
   padding: 3rem 2rem;
   text-align: center;
   font-size: 0.82rem;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.3);
 }
 .footer-brand { font-family: 'Newsreader', serif; font-size: 1.3rem; color: var(--bg); margin-bottom: 0.5rem; font-weight: 500; }
 .footer-brand span { color: var(--accent-glow); }
 
+/* ========== CURSOR GLOW — desktop only ========== */
+@media (hover: hover) and (pointer: fine) {
+  .cursor-glow {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,85,43,0.06) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: opacity 0.4s;
+    opacity: 0;
+  }
+  .cursor-glow.active { opacity: 1; }
+}
+
 /* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
   .header { padding: 1.25rem; flex-wrap: wrap; gap: 0.75rem; }
+  .header.scrolled { padding: 0.75rem 1.25rem; }
   .header-nav { gap: 1.25rem; width: 100%; justify-content: center; }
-  .header-nav a { font-size: 0.8rem; }
+  .header-nav a { font-size: 0.78rem; }
   .masthead { padding: 3rem 1.25rem 2rem; }
   .hero-strip { grid-template-columns: 1fr; padding: 0 1.25rem; }
   .hero-side { flex-direction: row; }
   .hero-side-item { aspect-ratio: 1/1; }
-  .service-row { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 0; }
+  .service-row { grid-template-columns: 1fr; gap: 0; }
   .service-row:nth-child(even) .service-visual { order: 0; }
+  .service-visual { margin-top: 0; aspect-ratio: 16/9; }
+  .service-info { padding: 1.5rem 0; }
+  .service-details { grid-template-columns: 1fr; }
   .review-block { grid-template-columns: 1fr; gap: 2rem; }
   .showcase { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
   .quick-trust { flex-direction: column; gap: 0.75rem; }
+  .counters-strip { gap: 2.5rem; padding: 2.5rem 1.25rem; }
   .section-inner { padding: 0 1.25rem; }
-  .topbar { padding: 0.5rem 1.25rem; font-size: 0.7rem; }
+  .topbar { padding: 0.45rem 1.25rem; font-size: 0.7rem; }
+  .parallax-banner { height: 50vh; min-height: 300px; }
+  .cursor-glow { display: none; }
 }
 </style>
 </head>
 <body>
 
+<!-- Cursor glow -->
+<div class="cursor-glow" id="cursorGlow"></div>
+
 <!-- Top bar -->
 <div class="topbar">
-  <div class="topbar-left"><span class="topbar-dot"></span> Disponible — intervention possible aujourd'hui</div>
+  <div class="topbar-left"><span class="status-dot"></span> Disponible — intervention possible aujourd'hui</div>
   <div class="topbar-right">📞 <a href="tel:+33177460645">01 77 46 06 45</a></div>
 </div>
 
 <!-- Header -->
-<header class="header">
+<header class="header" id="header">
   <a href="#" class="logo">T<span class="period">.</span>C<span class="period">.</span>E <span class="logo-tagline">Plombier Chauffagiste</span></a>
   <ul class="header-nav">
     <li><a href="#services">Services</a></li>
@@ -449,86 +622,143 @@ body {
 <section class="masthead">
   <div class="masthead-eyebrow">Plombier chauffagiste — Bourg-la-Reine, 92</div>
   <h1>Quand votre chaudière lâche un dimanche soir, <em>on décroche.</em></h1>
-  <p class="masthead-dek">5 activités. Des sous-pages dédiées. Devis clair, intervention rapide. Du lundi au samedi 7h-20h, dimanche sur rendez-vous.</p>
-  <div class="quick-trust" style="margin-top:2rem">
+  <p class="masthead-dek">Plomberie, chauffage, électricité, climatisation, maîtrise d'œuvre. 5 activités, une seule équipe. Devis gratuit, intervention rapide. Du lundi au samedi 7h-20h, dimanche sur rendez-vous.</p>
+  <div class="quick-trust reveal" style="margin-top:2rem">
     <div class="quick-trust-item"><span class="check">✓</span> Label RGE</div>
-    <div class="quick-trust-item"><span class="check">✓</span> Installateur agréé Frisquet, De Dietrich, Elm Leblanc</div>
+    <div class="quick-trust-item"><span class="check">✓</span> Agréé Frisquet, De Dietrich, Elm Leblanc</div>
     <div class="quick-trust-item"><span class="check">✓</span> Devis gratuit, prix transparent</div>
     <div class="quick-trust-item"><span class="check">✓</span> Dépannage 7j/7 jusqu'à 20h</div>
   </div>
 </section>
 
-<!-- Hero image strip -->
+<!-- Hero images -->
 <div class="hero-strip">
-  <div class="hero-main"><div class="hero-main-placeholder"></div></div>
+  <div class="hero-main"><img src="images/img1.png" alt="Plombier T.C.E au travail" loading="eager" onerror="this.style.display='none'; this.parentElement.querySelector('.hero-main-placeholder').style.display='flex'"><div class="hero-main-placeholder" style="display:none"></div></div>
   <div class="hero-side">
-    <div class="hero-side-item"></div>
-    <div class="hero-side-item"></div>
+    <div class="hero-side-item"><img src="images/img4.png" alt="Avant/Après rénovation" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'"></div>
+    <div class="hero-side-item"><img src="images/img3.png" alt="Outils professionnels" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'"></div>
   </div>
 </div>
 
-<!-- Services -->
+<!-- Services — contenu approfondi depuis le site de Sim -->
 <section class="section" id="services">
   <div class="section-inner">
     <div class="section-num">01</div>
     <h2 class="section-heading">Ce qu'on sait faire. Et ce qu'on fait bien.</h2>
   </div>
   <div class="section-inner services-layout">
-    <div class="service-row">
+
+    <!-- Plomberie -->
+    <div class="service-row reveal">
       <div class="service-visual"><div class="service-visual-inner sv-plumbing"><span class="service-visual-label">Photo plomberie</span></div></div>
       <div class="service-info">
         <h3>Plomberie</h3>
-        <p>Installation sanitaire complète. Recherche de fuites, débouchage, remplacement de robinetterie. Neuf et rénovation.</p>
+        <p class="hook">Installation, rénovation et dépannage de tous vos équipements sanitaires. De la recherche de fuite au chantier complet.</p>
+        <div class="service-details">
+          <span class="service-detail-item">Recherche de fuites d'eau et de gaz</span>
+          <span class="service-detail-item">Débouchage de canalisations</span>
+          <span class="service-detail-item">Installation salle de bains, douche</span>
+          <span class="service-detail-item">Chauffe-eau, ballon d'eau chaude</span>
+          <span class="service-detail-item">Robinets, mitigeurs, lavabos</span>
+          <span class="service-detail-item">Pompe à chaleur sanitaire</span>
+          <span class="service-detail-item">Canalisation, tuyauterie cuivre/PER</span>
+          <span class="service-detail-item">Détection de fuite, dégât des eaux</span>
+        </div>
         <div class="service-subs">
           <a href="#" class="service-sub">Installation</a>
           <a href="#" class="service-sub">Dépannage</a>
           <a href="#" class="service-sub">Entretien</a>
+          <a href="#" class="service-sub">Rénovation</a>
         </div>
-        <a href="#" class="service-cta">Voir la page plomberie →</a>
+        <a href="#" class="service-cta">Voir tous nos services plomberie →</a>
       </div>
     </div>
-    <div class="service-row">
-      <div class="service-visual"><div class="service-visual-inner sv-heating"><span class="service-visual-label">Photo chauffage</span></div></div>
+
+    <!-- Chauffage -->
+    <div class="service-row reveal">
+      <div class="service-visual"><img src="images/img2.png" alt="Installation chaudière" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'; this.parentElement.querySelector('.service-visual-inner').style.display='flex'"><div class="service-visual-inner sv-heating"><span class="service-visual-label">Photo chauffage</span></div></div>
       <div class="service-info">
         <h3>Chauffage</h3>
-        <p>Spécialiste chaudière gaz. Installation, remplacement, dépannage urgent. Entretien annuel. Agréé Frisquet, De Dietrich, Elm Leblanc.</p>
+        <p class="hook">Spécialiste chaudière gaz. Installation, remplacement, dépannage urgent. Contrat d'entretien annuel.</p>
+        <div class="service-details">
+          <span class="service-detail-item">Installation chaudière gaz condensation</span>
+          <span class="service-detail-item">Remplacement chaudière basse température</span>
+          <span class="service-detail-item">Dépannage chaudière 7j/7</span>
+          <span class="service-detail-item">Contrat d'entretien annuel</span>
+          <span class="service-detail-item">Chaudière murale et au sol</span>
+          <span class="service-detail-item">Radiateurs, plancher chauffant</span>
+          <span class="service-detail-item">Cheminée, solaire thermique</span>
+          <span class="service-detail-item">Chaudière collective</span>
+        </div>
         <div class="service-subs">
           <a href="#" class="service-sub">Chaudière gaz</a>
           <a href="#" class="service-sub">Installation</a>
           <a href="#" class="service-sub">Dépannage</a>
           <a href="#" class="service-sub">Entretien</a>
         </div>
-        <a href="#" class="service-cta">Voir la page chauffage →</a>
+        <a href="#" class="service-cta">Voir tous nos services chauffage →</a>
       </div>
     </div>
-    <div class="service-row">
+
+    <!-- Électricité -->
+    <div class="service-row reveal">
       <div class="service-visual"><div class="service-visual-inner sv-electric"><span class="service-visual-label">Photo électricité</span></div></div>
       <div class="service-info">
         <h3>Électricité</h3>
-        <p>Installation complète, mise aux normes du tableau électrique, dépannage. Travail soigné et conforme.</p>
+        <p class="hook">Installation complète, mise aux normes, dépannage. Tableau électrique, prises, éclairage. Conforme et soigné.</p>
+        <div class="service-details">
+          <span class="service-detail-item">Installation électrique complète</span>
+          <span class="service-detail-item">Mise aux normes du tableau</span>
+          <span class="service-detail-item">Rénovation électrique</span>
+          <span class="service-detail-item">Dépannage électrique urgent</span>
+          <span class="service-detail-item">Ajout prises, interrupteurs</span>
+          <span class="service-detail-item">Éclairage intérieur et extérieur</span>
+        </div>
         <div class="service-subs">
           <a href="#" class="service-sub">Installation</a>
           <a href="#" class="service-sub">Dépannage</a>
+          <a href="#" class="service-sub">Mise aux normes</a>
         </div>
-        <a href="#" class="service-cta">Voir la page électricité →</a>
+        <a href="#" class="service-cta">Voir tous nos services électricité →</a>
       </div>
     </div>
-    <div class="service-row">
+
+    <!-- Climatisation -->
+    <div class="service-row reveal">
       <div class="service-visual"><div class="service-visual-inner sv-cooling"><span class="service-visual-label">Photo climatisation</span></div></div>
       <div class="service-info">
         <h3>Climatisation</h3>
-        <p>Installation de climatiseurs et pompes à chaleur. Pose soignée, conseil sur le dimensionnement.</p>
+        <p class="hook">Installation de climatiseurs et pompes à chaleur. Pose soignée, conseil sur le dimensionnement.</p>
+        <div class="service-details">
+          <span class="service-detail-item">Installation climatiseur mural</span>
+          <span class="service-detail-item">Climatisation réversible</span>
+          <span class="service-detail-item">Pompe à chaleur air-air</span>
+          <span class="service-detail-item">Dimensionnement et conseil</span>
+          <span class="service-detail-item">Entretien climatisation</span>
+        </div>
         <div class="service-subs">
           <a href="#" class="service-sub">Installation</a>
+          <a href="#" class="service-sub">Clim réversible</a>
+          <a href="#" class="service-sub">Pompe à chaleur</a>
         </div>
-        <a href="#" class="service-cta">Voir la page climatisation →</a>
+        <a href="#" class="service-cta">Voir tous nos services climatisation →</a>
       </div>
     </div>
-    <div class="service-row">
+
+    <!-- Maîtrise d'œuvre -->
+    <div class="service-row reveal">
       <div class="service-visual"><div class="service-visual-inner sv-moe"><span class="service-visual-label">Photo maîtrise d'œuvre</span></div></div>
       <div class="service-info">
         <h3>Maîtrise d'œuvre</h3>
-        <p>Audit technique, conseil en travaux, expertise avant achat. Gestion de chantier tout corps d'état. Vous pilotez votre projet, on s'occupe du reste.</p>
+        <p class="hook">Audit technique, conseil en travaux, expertise avant achat. Gestion de chantier tout corps d'état.</p>
+        <div class="service-details">
+          <span class="service-detail-item">Audit technique complet</span>
+          <span class="service-detail-item">Conseil en rénovation</span>
+          <span class="service-detail-item">Expertise avant achat immobilier</span>
+          <span class="service-detail-item">Travaux tout corps d'état</span>
+          <span class="service-detail-item">Suivi de chantier</span>
+          <span class="service-detail-item">Mise en relation artisans</span>
+        </div>
         <div class="service-subs">
           <a href="#" class="service-sub">Audit</a>
           <a href="#" class="service-sub">Conseil</a>
@@ -538,26 +768,73 @@ body {
         <a href="#" class="service-cta">Voir la page maîtrise d'œuvre →</a>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- Project showcase -->
-<section id="work">
-  <div class="section-inner">
-    <div class="section-num">02</div>
-    <h2 class="section-heading">Du travail propre. À chaque fois.</h2>
-    <p style="color:rgba(255,255,255,0.4);max-width:500px;margin-bottom:0">Quelques exemples de chantiers récents. Avant / après, parce que c'est là qu'on voit la différence.</p>
   </div>
-  <div class="section-inner">
-    <div class="showcase">
-      <div class="showcase-item"><div class="showcase-label">Rénovation salle de bain — Bourg-la-Reine</div></div>
-      <div class="showcase-item"><div class="showcase-label">Remplacement chaudière — Antony</div></div>
-      <div class="showcase-item"><div class="showcase-label">Installation électrique — Sceaux</div></div>
+
+  <!-- Counters -->
+  <div class="counters-strip reveal" style="transform:translateY(20px)">
+    <div class="counter-item">
+      <div class="counter-number" data-target="7"><span class="plus"></span>j<span class="plus"></span>/<span class="plus"></span>7</div>
+      <div class="counter-label">Disponible</div>
+    </div>
+    <div class="counter-item">
+      <div class="counter-number" data-target="5"><span class="plus"></span>+</div>
+      <div class="counter-label">Années d'expérience</div>
+    </div>
+    <div class="counter-item">
+      <div class="counter-number" data-target="15"><span class="plus"></span>+</div>
+      <div class="counter-label">Ans d'expertise artisan</div>
+    </div>
+    <div class="counter-item">
+      <div class="counter-number" data-target="92"><span class="plus"></span></div>
+      <div class="counter-label">Hauts-de-Seine</div>
+    </div>
+    <div class="counter-item">
+      <div class="counter-number" data-target="3"><span class="plus"></span></div>
+      <div class="counter-label">Marques agréées</div>
     </div>
   </div>
 </section>
 
-<!-- Reviews -->
+<!-- Parallax quote banner -->
+<section class="parallax-banner" id="parallaxBanner">
+  <div class="parallax-bg"></div>
+  <div class="parallax-content reveal">
+    <p class="parallax-quote">« Installés à Bourg-la-Reine depuis plus de 5 ans, nos artisans comptent parmi les spécialistes du 92. Certains ont plus de 15 ans d'expérience dans leur domaine. »</p>
+    <p class="parallax-attribution">T.C.E S.I.M — Artisan RGE</p>
+  </div>
+</section>
+
+<!-- Réalisations -->
+<section id="work">
+  <div class="section-inner">
+    <div class="section-num">02</div>
+    <h2 class="section-heading">Du travail propre. À chaque fois.</h2>
+    <p style="color:rgba(255,255,255,0.4);max-width:500px;margin-bottom:0">Avant / après. Parce que c'est là qu'on voit la différence.</p>
+  </div>
+  <div class="section-inner">
+    <div class="showcase">
+      <div class="showcase-item reveal"><div class="showcase-label">Rénovation salle de bain — Bourg-la-Reine</div></div>
+      <div class="showcase-item reveal reveal-delay-1"><div class="showcase-label">Installation chaudière — Antony</div></div>
+      <div class="showcase-item reveal reveal-delay-2"><div class="showcase-label">Mise aux normes électrique — Sceaux</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Marques -->
+<section id="marques">
+  <div class="section-inner">
+    <div class="section-num" style="text-align:center">Agréments</div>
+    <h2 class="section-heading" style="text-align:center;margin:0.5rem auto 0">Installateur agréé</h2>
+    <div class="marques-grid reveal">
+      <div class="marque-item"><span class="brand">Frisquet</span><span class="cert">Installateur agréé</span></div>
+      <div class="marque-item"><span class="brand">De Dietrich</span><span class="cert">Installateur agréé</span></div>
+      <div class="marque-item"><span class="brand">ELM Leblanc</span><span class="cert">Installateur agréé</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Avis -->
 <section class="section" id="reviews">
   <div class="section-inner">
     <div class="section-num">03</div>
@@ -565,7 +842,7 @@ body {
   </div>
   <div class="section-inner">
     <div class="review-block">
-      <div>
+      <div class="reveal">
         <div class="review-quote">
           Remplacement complet de notre chaudière. Chantier nickel, prix conforme au devis, équipe ponctuelle. On a enfin chaud.
           <div class="review-attribution">
@@ -574,21 +851,21 @@ body {
           </div>
         </div>
       </div>
-      <div class="review-sidebar">
+      <div class="review-sidebar reveal reveal-delay-1">
         <div class="review-mini">
           <span class="review-stars">★★★★★</span>
-          <p>«&nbsp;Dépannage un dimanche à 19h. Intervention en moins d'une heure. Robinetterie réparée. Merci infiniment.&nbsp;»</p>
-          <div class="name">— Client à Sceaux</div>
+          <p>« Dépannage un dimanche à 19h. Intervention en moins d'une heure. Robinetterie réparée. Merci infiniment. »</p>
+          <div class="name">— Particulier à Sceaux</div>
         </div>
         <div class="review-mini">
           <span class="review-stars">★★★★★</span>
-          <p>«&nbsp;Installation électrique complète. Propre, dans les temps, aux normes. Je referai appel à T.C.E sans hésiter.&nbsp;»</p>
-          <div class="name">— Client à Antony</div>
+          <p>« Installation électrique complète. Propre, dans les temps, aux normes. Je referai appel à T.C.E sans hésiter. »</p>
+          <div class="name">— Particulier à Antony</div>
         </div>
         <div class="review-mini">
           <span class="review-stars">★★★★★</span>
-          <p>«&nbsp;Très bon diagnostic pour une fuite qu'on cherchait depuis des mois. Trouvée et réparée en une heure.&nbsp;»</p>
-          <div class="name">— Client à Bourg-la-Reine</div>
+          <p>« Très bon diagnostic pour une fuite qu'on cherchait depuis des mois. Trouvée et réparée en une heure. »</p>
+          <div class="name">— Particulier à Bourg-la-Reine</div>
         </div>
       </div>
     </div>
@@ -597,25 +874,29 @@ body {
 
 <!-- Zones -->
 <section id="zones">
-  <div class="marquee">
-    <span>Bourg-la-Reine</span><span class="highlight">●</span>
-    <span>Antony</span><span class="highlight">●</span>
-    <span>Sceaux</span><span class="highlight">●</span>
-    <span>Châtillon</span><span class="highlight">●</span>
-    <span>Montrouge</span><span class="highlight">●</span>
-    <span>Clamart</span><span class="highlight">●</span>
-    <span>Fontenay-aux-Roses</span><span class="highlight">●</span>
-    <span>L'Haÿ-les-Roses</span><span class="highlight">●</span>
-    <span>Paris</span><span class="highlight">●</span>
-    <span>Bourg-la-Reine</span><span class="highlight">●</span>
-    <span>Antony</span><span class="highlight">●</span>
-    <span>Sceaux</span><span class="highlight">●</span>
-    <span>Châtillon</span><span class="highlight">●</span>
-    <span>Montrouge</span><span class="highlight">●</span>
-    <span>Clamart</span><span class="highlight">●</span>
-    <span>Fontenay-aux-Roses</span><span class="highlight">●</span>
-    <span>L'Haÿ-les-Roses</span><span class="highlight">●</span>
-    <span>Paris</span><span class="highlight">●</span>
+  <div class="marquee-wrap" id="marqueeWrap">
+    <div class="marquee">
+      <span>Bourg-la-Reine</span><span class="dot">●</span>
+      <span>Antony</span><span class="dot">●</span>
+      <span>Sceaux</span><span class="dot">●</span>
+      <span>Châtillon</span><span class="dot">●</span>
+      <span>Montrouge</span><span class="dot">●</span>
+      <span>Clamart</span><span class="dot">●</span>
+      <span>Fontenay-aux-Roses</span><span class="dot">●</span>
+      <span>L'Haÿ-les-Roses</span><span class="dot">●</span>
+      <span>Paris</span><span class="dot">●</span>
+    </div>
+    <div class="marquee">
+      <span>Bourg-la-Reine</span><span class="dot">●</span>
+      <span>Antony</span><span class="dot">●</span>
+      <span>Sceaux</span><span class="dot">●</span>
+      <span>Châtillon</span><span class="dot">●</span>
+      <span>Montrouge</span><span class="dot">●</span>
+      <span>Clamart</span><span class="dot">●</span>
+      <span>Fontenay-aux-Roses</span><span class="dot">●</span>
+      <span>L'Haÿ-les-Roses</span><span class="dot">●</span>
+      <span>Paris</span><span class="dot">●</span>
+    </div>
   </div>
 </section>
 
@@ -626,23 +907,29 @@ body {
     <h2 class="section-heading">Parlez-nous de votre projet.</h2>
   </div>
   <div class="section-inner">
-    <div class="contact-grid">
+    <div class="contact-grid reveal">
       <div class="contact-card">
         <div class="business-name">T.C.E S.I.M</div>
-        <div class="business-desc">Plombier chauffagiste — Bourg-la-Reine</div>
-        <div class="field"><div class="field-label">Téléphone</div><div class="field-value large">01 77 46 06 45</div></div>
+        <div class="business-desc">Plombier chauffagiste — Bourg-la-Reine 92</div>
+        <div class="field"><div class="field-label">Téléphone</div><div class="field-value highlight">01 77 46 06 45</div></div>
         <div class="field"><div class="field-label">Adresse</div><div class="field-value">17 Avenue du Général Leclerc<br>92340 Bourg-la-Reine</div></div>
         <div class="field"><div class="field-label">Horaires</div><div class="field-value">Lundi – Samedi : 7h – 20h<br>Dimanche : sur rendez-vous</div></div>
         <div class="field"><div class="field-label">Dépannage</div><div class="field-value">7j/7 — astreinte jusqu'à 20h</div></div>
-        <a href="tel:+33177460645" style="display:inline-block;margin-top:1rem;background:var(--accent);color:var(--white);padding:0.8rem 1.8rem;text-decoration:none;font-weight:600;font-size:0.95rem">📞 Appeler</a>
+        <a href="tel:+33177460645" class="cta-btn">📞 Appeler maintenant</a>
       </div>
       <div class="contact-map">
         <div class="contact-map-inner">
-          <div style="font-family:'Newsreader',serif;font-size:1.2rem;font-style:italic;">Nous intervenons dans</div>
+          <div style="font-family:'Newsreader',serif;font-size:1.2rem;font-style:italic;color:var(--ink-muted)">Nous intervenons dans</div>
           <div class="city-list">
-            <span>Bourg-la-Reine</span> <span>Antony</span> <span>Sceaux</span>
-            <span>Châtillon</span> <span>Montrouge</span> <span>Clamart</span>
-            <span>Fontenay-aux-Roses</span> <span>L'Haÿ-les-Roses</span> <span>Paris</span>
+            <span class="city-pill highlight">Bourg-la-Reine</span>
+            <span class="city-pill">Antony</span>
+            <span class="city-pill">Sceaux</span>
+            <span class="city-pill">Châtillon</span>
+            <span class="city-pill">Montrouge</span>
+            <span class="city-pill">Clamart</span>
+            <span class="city-pill">Fontenay-aux-Roses</span>
+            <span class="city-pill">L'Haÿ-les-Roses</span>
+            <span class="city-pill">Paris</span>
           </div>
         </div>
       </div>
@@ -657,7 +944,91 @@ body {
 </footer>
 
 <script>
-// Smooth scroll
+// ========== HEADER SHRINK ON SCROLL ==========
+const header = document.getElementById('header');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  header.classList.toggle('scrolled', y > 50);
+  lastScroll = y;
+}, { passive: true });
+
+// ========== SCROLL REVEAL ==========
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+revealEls.forEach(el => observer.observe(el));
+
+// ========== COUNTER ANIMATION ==========
+const counters = document.querySelectorAll('.counter-number[data-target]');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const target = parseInt(el.dataset.target);
+    const duration = 2000;
+    const start = performance.now();
+    const animate = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.childNodes[0].textContent = Math.round(target * eased);
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+    counterObserver.unobserve(el);
+  });
+}, { threshold: 0.5 });
+counters.forEach(el => counterObserver.observe(el));
+
+// ========== PARALLAX BANNER ==========
+const parallaxBanner = document.getElementById('parallaxBanner');
+const parallaxBg = parallaxBanner?.querySelector('.parallax-bg');
+if (parallaxBanner && parallaxBg) {
+  window.addEventListener('scroll', () => {
+    const rect = parallaxBanner.getBoundingClientRect();
+    const center = rect.top + rect.height / 2;
+    const screenCenter = window.innerHeight / 2;
+    const offset = (center - screenCenter) / screenCenter;
+    parallaxBg.style.transform = `translateY(${offset * 40}px)`;
+  }, { passive: true });
+}
+
+// ========== MARQUEE ANIMATION ==========
+const marqueeWrap = document.getElementById('marqueeWrap');
+if (marqueeWrap) {
+  let marqueePos = 0;
+  const speed = 0.5;
+  const animate = () => {
+    marqueePos -= speed;
+    marqueeWrap.style.transform = `translateX(${marqueePos}px)`;
+    const firstChild = marqueeWrap.children[0];
+    if (firstChild && marqueePos <= -firstChild.offsetWidth) {
+      marqueePos += firstChild.offsetWidth;
+    }
+    requestAnimationFrame(animate);
+  };
+  requestAnimationFrame(animate);
+}
+
+// ========== CURSOR GLOW ==========
+const glow = document.getElementById('cursorGlow');
+if (glow && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  let glowTimeout;
+  document.addEventListener('mousemove', (e) => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+    glow.classList.add('active');
+    clearTimeout(glowTimeout);
+    glowTimeout = setTimeout(() => glow.classList.remove('active'), 800);
+  }, { passive: true });
+}
+
+// ========== SMOOTH SCROLL ==========
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
