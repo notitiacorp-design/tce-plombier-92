@@ -3,188 +3,471 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>T.C.E | Plombier Chauffagiste 92</title>
+<meta name="description" content="T.C.E - Plombier chauffagiste à Bourg-la-Reine (92). Installation, dépannage, entretien : plomberie, chauffage, électricité, climatisation, maîtrise d'œuvre. Devis gratuit.">
+<title>T.C.E | Plombier Chauffagiste - Bourg-la-Reine 92</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: system-ui, -apple-system, sans-serif; color: #1a1a2e; line-height: 1.6; }
-  
-  /* Header */
-  header { background: #0f1923; color: #fff; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
-  header .logo { font-size: 1.5rem; font-weight: 700; color: #f97316; }
-  header nav a { color: #ccc; text-decoration: none; margin-left: 1.5rem; font-size: 0.95rem; }
-  header nav a:hover { color: #f97316; }
-  header .tel { color: #f97316; font-weight: 600; }
+:root {
+  --navy: #0a1628;
+  --blue: #1e3a5f;
+  --gold: #c8963e;
+  --gold-light: #e8c573;
+  --white: #ffffff;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-400: #94a3b8;
+  --gray-600: #475569;
+  --gray-800: #1e293b;
+  --radius: 12px;
+}
 
-  /* Hero */
-  .hero { background: linear-gradient(135deg, #0f1923 0%, #1a2744 100%); color: #fff; padding: 5rem 2rem; text-align: center; }
-  .hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-  .hero h1 span { color: #f97316; }
-  .hero p { font-size: 1.2rem; color: #94a3b8; max-width: 600px; margin: 1rem auto 2rem; }
-  .hero .cta { display: inline-block; background: #f97316; color: #fff; padding: 0.9rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 1.1rem; }
-  .hero .cta:hover { background: #ea580c; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-  /* Section title */
-  .section-title { text-align: center; padding: 4rem 1rem 2rem; }
-  .section-title h2 { font-size: 2rem; color: #0f1923; }
-  .section-title p { color: #64748b; margin-top: 0.5rem; }
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--gray-800);
+  background: var(--white);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
 
-  /* Services grid */
-  .services { max-width: 1100px; margin: 0 auto; padding: 0 1rem 4rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-  .service-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 2rem; transition: box-shadow 0.2s; }
-  .service-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-  .service-card .icon { width: 48px; height: 48px; background: #fff7ed; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem; }
-  .service-card h3 { font-size: 1.2rem; color: #0f1923; margin-bottom: 0.5rem; }
-  .service-card .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
-  .service-card .tag { background: #f1f5f9; color: #475569; padding: 0.3rem 0.7rem; border-radius: 20px; font-size: 0.8rem; }
+/* NAV */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(10, 22, 40, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 0 3rem;
+  height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background 0.3s;
+}
+.nav.scrolled { background: rgba(10, 22, 40, 0.98); }
+.logo {
+  font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em;
+  color: var(--white);
+}
+.logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a {
+  color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; font-weight: 500;
+  transition: color 0.2s; position: relative;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--white); }
+.nav-phone {
+  color: var(--gold-light); font-weight: 600; font-size: 0.95rem;
+  text-decoration: none; display: flex; align-items: center; gap: 0.5rem;
+}
+.nav-phone::before {
+  content: ''; width: 8px; height: 8px;
+  background: #22c55e; border-radius: 50%;
+  animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+}
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: 0.3s; }
 
-  /* About */
-  .about { background: #f8fafc; padding: 4rem 2rem; }
-  .about-inner { max-width: 900px; margin: 0 auto; }
-  .about h2 { font-size: 1.8rem; margin-bottom: 1rem; }
-  .about p { color: #475569; margin-bottom: 1rem; }
+/* HERO */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 50%, #0f2044 100%);
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  position: relative; overflow: hidden; padding: 120px 2rem 100px;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 20%, rgba(200,150,62,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 80%, rgba(200,150,62,0.05) 0%, transparent 60%);
+}
+.hero-content { position: relative; z-index: 1; max-width: 800px; }
+.hero-badge {
+  display: inline-block; background: rgba(200,150,62,0.15);
+  color: var(--gold-light); border: 1px solid rgba(200,150,62,0.3);
+  padding: 0.4rem 1.2rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+  margin-bottom: 1.5rem; letter-spacing: 0.04em;
+}
+.hero h1 { font-size: 3.5rem; font-weight: 800; color: var(--white); line-height: 1.15; margin-bottom: 1rem; letter-spacing: -0.03em; }
+.hero h1 span { color: var(--gold); }
+.hero p { font-size: 1.2rem; color: rgba(255,255,255,0.65); max-width: 550px; margin: 0 auto 2.5rem; }
+.hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem;
+  border-radius: 8px; font-weight: 600; font-size: 1rem; text-decoration: none;
+  transition: all 0.25s; cursor: pointer; border: none;
+}
+.btn-primary { background: var(--gold); color: var(--navy); box-shadow: 0 4px 20px rgba(200,150,62,0.3); }
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,150,62,0.4); }
+.btn-outline { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,0.25); }
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
 
-  /* Zones */
-  .zones { padding: 4rem 2rem; max-width: 1100px; margin: 0 auto; text-align: center; }
-  .zones h2 { font-size: 1.8rem; margin-bottom: 1.5rem; }
-  .zone-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; }
-  .zone-tag { background: #0f1923; color: #fff; padding: 0.6rem 1.2rem; border-radius: 25px; font-size: 0.9rem; }
+/* SCROLL ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* Contact CTA */
-  .contact-cta { background: #f97316; color: #fff; text-align: center; padding: 4rem 2rem; }
-  .contact-cta h2 { font-size: 2rem; margin-bottom: 0.5rem; }
-  .contact-cta p { font-size: 1.1rem; margin-bottom: 1.5rem; opacity: 0.9; }
-  .contact-cta .btn { display: inline-block; background: #fff; color: #f97316; padding: 0.9rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 1.1rem; }
+/* SECTION COMMON */
+section { padding: 5rem 2rem; }
+.container { max-width: 1100px; margin: 0 auto; }
+.section-label {
+  text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem;
+  font-weight: 700; color: var(--gold); margin-bottom: 0.75rem;
+}
+.section-title { font-size: 2.5rem; font-weight: 800; color: var(--navy); letter-spacing: -0.02em; margin-bottom: 1rem; }
+.section-sub { color: var(--gray-600); font-size: 1.1rem; max-width: 600px; }
 
-  /* Footer */
-  footer { background: #0f1923; color: #94a3b8; text-align: center; padding: 2rem; font-size: 0.9rem; }
+/* SERVICES */
+#services { background: var(--gray-50); }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+.service-card {
+  background: var(--white); border-radius: var(--radius); padding: 2rem;
+  border: 1px solid var(--gray-200); transition: all 0.3s; cursor: default;
+  position: relative; overflow: hidden;
+}
+.service-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-color: var(--gold); }
+.service-card::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+}
+.service-card:hover::after { transform: scaleX(1); }
+.service-icon {
+  width: 56px; height: 56px; border-radius: 14px; display: flex;
+  align-items: center; justify-content: center; font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.bg-plomberie { background: #eef2ff; color: #4f46e5; }
+.bg-chauffage { background: #fef2f2; color: #dc2626; }
+.bg-electricite { background: #fffbeb; color: #d97706; }
+.bg-clim { background: #f0fdf4; color: #16a34a; }
+.bg-moe { background: #faf5ff; color: #7c3aed; }
+.service-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--navy); }
+.service-card > p { color: var(--gray-600); font-size: 0.95rem; margin-bottom: 1.25rem; }
+.service-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tag { background: var(--gray-100); color: var(--gray-600); padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
 
-  /* Responsive */
-  @media (max-width: 768px) {
-    header { flex-direction: column; gap: 0.5rem; }
-    header nav a { margin-left: 0.8rem; font-size: 0.85rem; }
-    .hero h1 { font-size: 1.8rem; }
-    .services { grid-template-columns: 1fr; }
-  }
+/* ABOUT + RGE */
+#about { background: var(--white); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 3rem; }
+.about-text p { color: var(--gray-600); margin-bottom: 1.25rem; font-size: 1.05rem; }
+.about-features { display: grid; gap: 1.25rem; }
+.feature {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: 1.25rem; border-radius: var(--radius); background: var(--gray-50);
+  border: 1px solid var(--gray-200); transition: all 0.2s;
+}
+.feature:hover { border-color: var(--gold); background: var(--white); }
+.feature-icon { font-size: 1.3rem; min-width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 10px; background: #eef2ff; }
+.feature h4 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.2rem; }
+.feature p { font-size: 0.9rem; color: var(--gray-600); }
+
+/* RGE BADGE */
+.rge-badge {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  background: #f0fdf4; border: 1.5px solid #22c55e; border-radius: 50px;
+  padding: 0.5rem 1.25rem; margin: 1rem 0 2rem;
+  font-weight: 600; color: #166534; font-size: 0.9rem;
+}
+.rge-badge::before { content: '✓'; font-weight: 800; color: #22c55e; }
+
+/* BRANDS */
+#marques { background: var(--gray-100); text-align: center; }
+.brands { display: flex; justify-content: center; gap: 4rem; margin-top: 2.5rem; flex-wrap: wrap; }
+.brand-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+.brand-box {
+  width: 100px; height: 100px; border-radius: var(--radius);
+  background: var(--white); display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.85rem; color: var(--gray-600);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04); border: 1px solid var(--gray-200);
+  transition: transform 0.2s;
+}
+.brand-box:hover { transform: translateY(-3px); }
+.brand-name { font-weight: 600; color: var(--navy); font-size: 0.9rem; }
+.brand-label { font-size: 0.75rem; color: var(--gray-400); }
+
+/* ZONES */
+#zones { text-align: center; }
+.zones-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin-top: 2rem; }
+.zone-pill { background: var(--navy); color: var(--white); padding: 0.65rem 1.4rem; border-radius: 50px; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; }
+.zone-pill:hover { background: var(--gold); transform: scale(1.05); }
+
+/* CTA */
+#contact { background: linear-gradient(135deg, var(--navy), #12233e); text-align: center; }
+#contact .section-label { color: var(--gold-light); }
+#contact .section-title { color: var(--white); }
+#contact .section-sub { color: rgba(255,255,255,0.6); margin: 0 auto 1rem; }
+.contact-info { margin-top: 2rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
+.contact-item { text-align: center; }
+.contact-item .label { font-size: 0.8rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+.contact-item .value { font-size: 1.1rem; color: var(--white); font-weight: 600; }
+.contact-phone { font-size: 1.8rem; color: var(--gold-light); font-weight: 800; margin: 1.5rem 0; }
+.contact-address { color: rgba(255,255,255,0.6); font-size: 0.95rem; }
+.cta-btn { margin-top: 2rem; }
+
+/* FOOTER */
+footer { background: var(--navy); color: var(--gray-400); text-align: center; padding: 2rem; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.06); }
+footer a { color: var(--gold-light); text-decoration: none; }
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .nav { padding: 0 1.25rem; }
+  .nav-links { display: none; position: fixed; top: 72px; left: 0; right: 0; background: var(--navy); flex-direction: column; padding: 1.5rem; gap: 1rem; border-top: 1px solid rgba(255,255,255,0.06); }
+  .nav-links.open { display: flex; }
+  .nav-phone { display: none; }
+  .hamburger { display: flex; }
+  .hero h1 { font-size: 2.2rem; }
+  .section-title { font-size: 1.8rem; }
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .services-grid { grid-template-columns: 1fr; }
+  section { padding: 3rem 1.25rem; }
+}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">T.C.E</div>
-  <nav>
+<nav class="nav" id="nav">
+  <div class="logo">T<span>.C.E</span></div>
+  <div class="nav-links" id="navLinks">
     <a href="#services">Services</a>
+    <a href="#about">À propos</a>
+    <a href="#marques">Marques</a>
     <a href="#zones">Zones</a>
     <a href="#contact">Contact</a>
-    <span class="tel">06 XX XX XX XX</span>
-  </nav>
-</header>
-
-<section class="hero">
-  <h1>Votre <span>plombier chauffagiste</span> dans le 92</h1>
-  <p>Installation, dépannage et entretien. Plomberie, chauffage, électricité, climatisation et maîtrise d'œuvre. Intervention rapide à Bourg-la-Reine, Antony, Sceaux et alentours.</p>
-  <a href="#contact" class="cta">Demander un devis gratuit</a>
-</section>
-
-<div class="section-title" id="services">
-  <h2>Nos 5 activités</h2>
-  <p>Un artisan, tous vos travaux</p>
-</div>
-
-<div class="services">
-  <div class="service-card">
-    <div class="icon">🔧</div>
-    <h3>Plomberie</h3>
-    <p>Installation, rénovation et dépannage de tous vos équipements sanitaires.</p>
-    <div class="tags">
-      <span class="tag">Installation</span>
-      <span class="tag">Dépannage</span>
-      <span class="tag">Entretien</span>
-      <span class="tag">Fuite d'eau</span>
-      <span class="tag">Salle de bains</span>
-      <span class="tag">Chauffe-eau</span>
-    </div>
   </div>
+  <a href="tel:+33177460645" class="nav-phone">01 77 46 06 45</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-  <div class="service-card">
-    <div class="icon">🔥</div>
-    <h3>Chauffage</h3>
-    <p>Chaudière à gaz, installation, dépannage et entretien. Installateur agréé Frisquet et Elm Leblanc.</p>
-    <div class="tags">
-      <span class="tag">Chaudière gaz</span>
-      <span class="tag">Installation</span>
-      <span class="tag">Dépannage</span>
-      <span class="tag">Entretien</span>
-      <span class="tag">Pompe à chaleur</span>
+<section class="hero" id="home">
+  <div class="hero-content reveal">
+    <div class="hero-badge">Intervention 7j/7 — jusqu'à 20h</div>
+    <h1>Plombier chauffagiste<br>à <span>Bourg-la-Reine</span></h1>
+    <p>Installation, dépannage et entretien en plomberie, chauffage, électricité, climatisation et maîtrise d'œuvre. Intervention rapide dans tout le 92.</p>
+    <div class="hero-buttons">
+      <a href="tel:+33177460645" class="btn btn-primary">📞 01 77 46 06 45</a>
+      <a href="#contact" class="btn btn-outline">Devis gratuit</a>
     </div>
-  </div>
-
-  <div class="service-card">
-    <div class="icon">⚡</div>
-    <h3>Électricité</h3>
-    <p>Installation électrique, mise aux normes, dépannage pour les particuliers et professionnels.</p>
-    <div class="tags">
-      <span class="tag">Installation</span>
-      <span class="tag">Dépannage</span>
-      <span class="tag">Mise aux normes</span>
-    </div>
-  </div>
-
-  <div class="service-card">
-    <div class="icon">❄️</div>
-    <h3>Climatisation</h3>
-    <p>Installation de climatiseurs réversibles et pompes à chaleur, confort été comme hiver.</p>
-    <div class="tags">
-      <span class="tag">Installation</span>
-      <span class="tag">Clim réversible</span>
-      <span class="tag">PAC</span>
-    </div>
-  </div>
-
-  <div class="service-card">
-    <div class="icon">🏗️</div>
-    <h3>Maîtrise d'œuvre</h3>
-    <p>Audit, conseil et expertise sur vos travaux tous corps d'état. Coordination de chantier complète.</p>
-    <div class="tags">
-      <span class="tag">Audit</span>
-      <span class="tag">Conseil</span>
-      <span class="tag">Expertise</span>
-      <span class="tag">Tout corps d'état</span>
-    </div>
-  </div>
-</div>
-
-<section class="about">
-  <div class="about-inner">
-    <h2>T.C.E, votre artisan de confiance</h2>
-    <p>Basés à Bourg-la-Reine, nous intervenons dans tout le sud des Hauts-de-Seine depuis plus de 10 ans. Notre équipe qualifiée prend en charge tous vos projets, de la simple panne à la rénovation complète.</p>
-    <p>Réactivité, transparence et travail soigné : c'est ce que nos clients apprécient.</p>
   </div>
 </section>
 
-<div class="zones" id="zones">
-  <h2>Zones d'intervention</h2>
-  <p style="color:#64748b;margin-bottom:1.5rem">Intervention rapide dans tout le 92 et le 94</p>
-  <div class="zone-tags">
-    <span class="zone-tag">Bourg-la-Reine</span>
-    <span class="zone-tag">Antony</span>
-    <span class="zone-tag">Sceaux</span>
-    <span class="zone-tag">Châtillon</span>
-    <span class="zone-tag">Montrouge</span>
-    <span class="zone-tag">Clamart</span>
-    <span class="zone-tag">Fontenay-aux-Roses</span>
-    <span class="zone-tag">L'Haÿ-les-Roses</span>
+<section id="services">
+  <div class="container">
+    <div class="section-label reveal">Domaines d'expertise</div>
+    <h2 class="section-title reveal">5 activités, un seul artisan</h2>
+    <p class="section-sub reveal">Plus de 15 ans d'expérience pour certains de nos spécialistes. Travail soigné, tarifs transparents.</p>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon bg-plomberie">🔧</div>
+        <h3>Plomberie</h3>
+        <p>Installation, rénovation et dépannage de tous vos équipements sanitaires.</p>
+        <div class="service-tags">
+          <span class="tag">Installation sanitaire</span>
+          <span class="tag">Dépannage fuite</span>
+          <span class="tag">Salle de bains</span>
+          <span class="tag">Chauffe-eau</span>
+          <span class="tag">Débouchage</span>
+          <span class="tag">Robinetterie</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon bg-chauffage">🔥</div>
+        <h3>Chauffage</h3>
+        <p>Installation, entretien et dépannage de chaudières à gaz. Contrats d'entretien disponibles.</p>
+        <div class="service-tags">
+          <span class="tag">Chaudière gaz</span>
+          <span class="tag">Entretien annuel</span>
+          <span class="tag">Dépannage 24/7</span>
+          <span class="tag">Pompe à chaleur</span>
+          <span class="tag">Chaudière condensation</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon bg-electricite">⚡</div>
+        <h3>Électricité</h3>
+        <p>Installation électrique, rénovation, mise aux normes et dépannage. Particuliers et professionnels.</p>
+        <div class="service-tags">
+          <span class="tag">Installation</span>
+          <span class="tag">Dépannage</span>
+          <span class="tag">Mise aux normes</span>
+          <span class="tag">Tableau électrique</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon bg-clim">❄️</div>
+        <h3>Climatisation</h3>
+        <p>Installation de climatiseurs réversibles et pompes à chaleur air/air. Confort toute l'année.</p>
+        <div class="service-tags">
+          <span class="tag">Installation</span>
+          <span class="tag">Clim réversible</span>
+          <span class="tag">PAC air/air</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon bg-moe">🏗️</div>
+        <h3>Maîtrise d'œuvre</h3>
+        <p>Audit, conseil et expertise. Coordination de vos travaux tous corps d'état, de A à Z.</p>
+        <div class="service-tags">
+          <span class="tag">Audit technique</span>
+          <span class="tag">Conseil</span>
+          <span class="tag">Expertise</span>
+          <span class="tag">Tout corps d'état</span>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
-<div class="contact-cta" id="contact">
-  <h2>Un projet ? Une urgence ?</h2>
-  <p>Appelez-nous ou demandez un devis en ligne. Réponse sous 24h.</p>
-  <a href="#" class="btn">06 XX XX XX XX</a>
-</div>
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="section-label">Pourquoi T.C.E</div>
+        <h2 class="section-title">Un artisan qualifié, des tarifs justes</h2>
+        <div class="about-text">
+          <p>Installé depuis plus de 5 ans au 17 avenue du Général Leclerc à Bourg-la-Reine, T.C.E met son expérience au service des particuliers et professionnels du 92 et du 94.</p>
+          <p>Nous savons ce que vaut notre travail, mais nous savons aussi ce que représente un investissement pour des travaux. Nos tarifs sont compétitifs, transparents et cohérents avec le marché.</p>
+        </div>
+        <div class="rge-badge">Label RGE — Accès aux aides et primes travaux</div>
+      </div>
+      <div class="about-features reveal">
+        <div class="feature">
+          <div class="feature-icon">🏢</div>
+          <div>
+            <h4>Expertise solide</h4>
+            <p>Plus de 15 ans d'expérience pour nos spécialistes. Entreprise installée à Bourg-la-Reine.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🏷️</div>
+          <div>
+            <h4>Label RGE</h4>
+            <p>Certifié Reconnu Garant de l'Environnement. Vos travaux sont éligibles aux aides de l'État.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🕐</div>
+          <div>
+            <h4>Disponible 7j/7</h4>
+            <p>Du lundi au samedi de 7h à 20h. Le dimanche sur rendez-vous. Dépannage rapide.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📋</div>
+          <div>
+            <h4>Devis détaillé</h4>
+            <p>Un devis clair et gratuit avant chaque intervention. Pas de mauvaise surprise.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="marques">
+  <div class="container">
+    <div class="section-label reveal">Partenaires</div>
+    <h2 class="section-title reveal">Installateur agréé</h2>
+    <p class="section-sub reveal" style="margin:0 auto">Nous travaillons avec les plus grandes marques de chauffage. Vente, pose, entretien et SAV.</p>
+    <div class="brands reveal">
+      <div class="brand-item">
+        <div class="brand-box">F</div>
+        <div class="brand-name">Frisquet</div>
+        <div class="brand-label">Installateur agréé</div>
+      </div>
+      <div class="brand-item">
+        <div class="brand-box">DD</div>
+        <div class="brand-name">De Dietrich</div>
+        <div class="brand-label">Installateur agréé</div>
+      </div>
+      <div class="brand-item">
+        <div class="brand-box">EL</div>
+        <div class="brand-name">Elm Leblanc</div>
+        <div class="brand-label">Installateur agréé</div>
+      </div>
+    </div>
+    <p style="color:var(--gray-400);margin-top:1.5rem;font-size:0.9rem">Contrat d'entretien et SAV pour toutes les marques</p>
+  </div>
+</section>
+
+<section id="zones">
+  <div class="container">
+    <div class="section-label reveal">Intervention</div>
+    <h2 class="section-title reveal">Le 92 et le 94</h2>
+    <p class="section-sub reveal" style="margin:0 auto 0.5rem">Basés à Bourg-la-Reine, nous couvrons tout le sud des Hauts-de-Seine.</p>
+    <div class="zones-grid reveal">
+      <span class="zone-pill">Bourg-la-Reine</span>
+      <span class="zone-pill">Antony</span>
+      <span class="zone-pill">Sceaux</span>
+      <span class="zone-pill">Châtillon</span>
+      <span class="zone-pill">Montrouge</span>
+      <span class="zone-pill">Clamart</span>
+      <span class="zone-pill">Fontenay-aux-Roses</span>
+      <span class="zone-pill">L'Haÿ-les-Roses</span>
+      <span class="zone-pill">Paris</span>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="section-label reveal">Contact</div>
+    <h2 class="section-title reveal">Un projet ? Une urgence ?</h2>
+    <p class="section-sub reveal" style="color:rgba(255,255,255,0.5)">Appelez-nous pour un devis gratuit. Réponse rapide, intervention sous 48h.</p>
+    <div class="contact-phone reveal">01 77 46 06 45</div>
+    <div class="contact-address reveal">17 Avenue du Général Leclerc, 92340 Bourg-la-Reine</div>
+    <div class="contact-info reveal">
+      <div class="contact-item"><div class="label">Horaires</div><div class="value">Lun-Sam 7h-20h</div></div>
+      <div class="contact-item"><div class="label">Dimanche</div><div class="value">Sur rendez-vous</div></div>
+      <div class="contact-item"><div class="label">Dépannage</div><div class="value">7j/7 jusqu'à 20h</div></div>
+    </div>
+    <div class="cta-btn reveal">
+      <a href="tel:+33177460645" class="btn btn-primary" style="font-size:1.1rem; padding:1rem 2.5rem;">📞 Appeler maintenant</a>
+    </div>
+  </div>
+</section>
 
 <footer>
-  <p>T.C.E &copy; 2026 &mdash; Plombier Chauffagiste &mdash; Bourg-la-Reine 92</p>
+  <p>&copy; 2026 T.C.E S.I.M — Plombier Chauffagiste — Bourg-la-Reine 92</p>
+  <p style="margin-top:0.5rem"><a href="#">Mentions légales</a> · <a href="#">Politique de confidentialité</a></p>
 </footer>
 
+<script>
+// Mobile menu
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+</script>
 </body>
 </html>
